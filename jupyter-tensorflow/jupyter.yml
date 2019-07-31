@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyter
+  labels:
+    app: jupyter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyter
+  template:
+    metadata:
+      labels:
+        app: jupyter
+      annotations:
+        kubernetes.io/target-runtime: kiyot
+    spec:
+      containers:
+      - name: jupyter
+        image: tensorflow/tensorflow:latest-gpu-jupyter
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        env:
+        - name: JUPYTER_TOKEN
+          value: Run.ai
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jupyter-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: jupyter
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8888
