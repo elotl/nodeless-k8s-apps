@@ -14,7 +14,7 @@ spec:
       labels:
         app: nginx
       annotations:
-        kubernetes.io/target-runtime: kiyot
+        pod.elotl.co/launch-type: Spot
     spec:
       containers:
       - name: nginx
