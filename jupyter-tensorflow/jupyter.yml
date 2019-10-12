@@ -13,8 +13,6 @@ spec:
     metadata:
       labels:
         app: jupyter
-      annotations:
-        kubernetes.io/target-runtime: kiyot
     spec:
       containers:
       - name: jupyter
@@ -24,7 +22,7 @@ spec:
             nvidia.com/gpu: 1
         env:
         - name: JUPYTER_TOKEN
-          value: Run.ai
+          value: Elotl
 ---
 apiVersion: v1
 kind: Service
